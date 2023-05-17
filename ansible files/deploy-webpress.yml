@@ -1,0 +1,38 @@
+---
+- hosts: wordpress
+  become: yes
+  tasks:
+  - name: Install packages
+    apt:
+      pkg:
+      - apache2
+      - mysql-server
+      - php
+      - libapache2-mod-php
+      - php-mysql
+      state: present
+
+  - name: Download WordPress
+    get_url:
+      url: https://wordpress.org/latest.tar.gz
+      dest: /tmp
+
+  - name: Extract WordPress
+    unarchive:
+      src: /tmp/latest.tar.gz
+      dest: /var/www
+      remote_src: yes
+
+  - name: Move WordPress files
+    command: cp -R /var/www/wordpress/* /var/www/html/
+
+  - name: Update wp-config.php with database information
+    replace:
+      path: /var/www/html/wp-config.php
+      regexp: "{{ item.regexp }}"
+      replace: "{{ item.replace }}"
+    loop:
+      - { regexp: "database_name_here", replace: "{{ db_name }}" }
+      - { regexp: "username_here", replace: "{{ db_user }}" }
+      - { regexp: "password_here", replace: "{{ db_password }}" }
+      - { regexp: "localhost", replace: "{{ db_host }}" }
