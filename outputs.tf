@@ -13,9 +13,6 @@ output "vote_service_sg_id" {
   value = module.vote_service_sg.security_group_id
 }
 
-output "bean-elb-sg_id" {
-  value = module.bean-elb-sg.security_group_id
-}
 
 output "backend_sg" {
   value = module.backend_sg.security_group_id
