@@ -9,8 +9,7 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 4.0"
 
-
-  for_each = toset(keys(local.instances))
+  for_each = local.instances
 
   name = each.key
 
@@ -21,25 +20,21 @@ module "ec2_instance" {
   vpc_security_group_ids = [module.vote_service_sg.security_group_id]
 
   // Use modulo to distribute instances across different AZs
-  subnet_id = module.vpc.public_subnets[count.index]
+  subnet_id = module.vpc.public_subnets[each.key]
 
   associate_public_ip_address = true
   tags = {
     Terraform   = "true"
     Environment = "dev"
-    Role        = local.instances[each.key]
+    Role        = each.value
   }
 }
-
-
-count = length(module.vpc.public_subnets)
 
 data "aws_instance" "created_instances" {
   for_each = module.ec2_instance
 
   instance_id = each.value.id
 }
-
 
 resource "aws_instance" "bastion" {
   ami                         = var.ami
@@ -54,9 +49,7 @@ resource "aws_instance" "bastion" {
     Terraform   = "true"
     Environment = "dev"
     Role        = "bastion"
-
   }
-
 
   connection {
     user        = var.USERNAME
