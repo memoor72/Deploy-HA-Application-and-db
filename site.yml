@@ -1,4 +1,4 @@
-- hosts: wordpress-instance-01
+- hosts: wordpress
   become: yes
   vars:
     db_host: aws_db_instance.devpro_rds.address

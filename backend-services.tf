@@ -28,7 +28,7 @@ resource "aws_lb" "wordpress" {
   security_groups    = [module.vote_service_sg.security_group_id]
   subnets            = module.vpc.public_subnets
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Environment = "production"
