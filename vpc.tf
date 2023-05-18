@@ -37,8 +37,7 @@ module "vpc" {
 
 resource "aws_internet_gateway" "gw" {
   count = var.should_create ? 1 : 0
-  vpc_id = var.vpc_id
+  vpc_id = module.vpc.vpc_id
 }
-
 
 
