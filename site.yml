@@ -1,0 +1,58 @@
+- hosts: wordpress-instance-01
+  become: yes
+  vars:
+    db_host: aws_db_instance.devpro_rds.address
+    db_name: var.db_name
+    db_user: var.db_user
+    db_password: var.db_password
+  tasks:
+    - name: Install necessary packages
+      apt:
+        name:
+          - apache2
+          - php
+          - php-mysql
+          - libapache2-mod-php
+          - php-cli
+        state: present
+
+    - name: Download WordPress
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/wordpress.tar.gz
+        mode: '0440'
+
+    - name: Extract WordPress
+      unarchive:
+        src: /tmp/wordpress.tar.gz
+        dest: /var/www/
+        remote_src: yes
+
+    - name: Copy WordPress config file
+      command: cp /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
+
+    - name: Update wp-config.php with database settings
+      lineinfile:
+        path: /var/www/wordpress/wp-config.php
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: "define\\('DB_NAME', 'database_name_here'\\);", line: "define('DB_NAME', '{{ db_name }}');" }
+        - { regexp: "define\\('DB_USER', 'username_here'\\);", line: "define('DB_USER', '{{ db_user }}');" }
+        - { regexp: "define\\('DB_PASSWORD', 'password_here'\\);", line: "define('DB_PASSWORD', '{{ db_password }}');" }
+        - { regexp: "define\\('DB_HOST', 'localhost'\\);", line: "define('DB_HOST', '{{ db_host }}');" }
+
+    - name: Set ownership of WordPress files
+      file:
+        path: /var/www/wordpress
+        owner: www-data
+        group: www-data
+        recurse: yes
+
+    - name: Enable Apache rewrite module
+      command: a2enmod rewrite
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

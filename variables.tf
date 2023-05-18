@@ -18,8 +18,6 @@ variable "db_user" {}
 variable "db_password" {}
 variable "db_name" {}
 variable "instance_count" {}
-variable "rmq_user" {}
-variable "rmq_pass" {}
 variable "instance_class" {}
 variable "node_type" {}
 variable "host_instance_type" {}

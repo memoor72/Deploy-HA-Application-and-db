@@ -8,18 +8,12 @@ output "public_subnets" {
   value       = module.vpc.public_subnets
 }
 
-
 output "vote_service_sg_id" {
   value = module.vote_service_sg.security_group_id
 }
 
-
 output "backend_sg" {
   value = module.backend_sg.security_group_id
-}
-
-output "prod_sg" {
-  value = module.prod_sg.security_group_id
 }
 
 output "key_pair_name" {
