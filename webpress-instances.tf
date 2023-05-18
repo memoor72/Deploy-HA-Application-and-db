@@ -18,7 +18,10 @@ module "ec2_instance" {
   key_name               = module.key_pair.key_pair_name
   monitoring             = true
   vpc_security_group_ids = [module.vote_service_sg.security_group_id]
-  subnet_id              = module.vpc.public_subnets[0]
+
+  // Use modulo to distribute instances across different AZs
+  subnet_id              = module.vpc.public_subnets[count.index % length(module.vpc.public_subnets)]
+
 
   associate_public_ip_address = true
   tags = {

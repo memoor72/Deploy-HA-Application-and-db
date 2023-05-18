@@ -1,0 +1,4 @@
+# aws_ec2.yml
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-east-2
