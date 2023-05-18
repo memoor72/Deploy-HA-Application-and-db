@@ -23,3 +23,4 @@ node_type           = "cache.t2.micro"
 host_instance_type  = "mq.t2.micro"
 USERNAME            = "ubuntu"
 PRIV_KEY_PATH       = "/Users/memoor/.ssh/id_rsa"
+should_create       = true

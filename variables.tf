@@ -23,3 +23,4 @@ variable "node_type" {}
 variable "host_instance_type" {}
 variable "USERNAME" {}
 variable "PRIV_KEY_PATH" {}
+variable "should_create" {}
