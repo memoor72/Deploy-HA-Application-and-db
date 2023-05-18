@@ -55,14 +55,14 @@ resource "aws_lb_listener" "wordpress" {
 
 resource "aws_lb_target_group_attachment" "wordpress1" {
   target_group_arn = aws_lb_target_group.wordpress.arn
-  target_id        = module.ec2_instance["wordpress1"].id
+  target_id        = module.ec2_instance["wordpress01"].id
 
   port             = 80
 }
 
 resource "aws_lb_target_group_attachment" "wordpress2" {
   target_group_arn = aws_lb_target_group.wordpress.arn
-  target_id        = module.ec2_instance["wordpress2"].id
+  target_id        = module.ec2_instance["wordpress02"].id
   port             = 80
 }
 
