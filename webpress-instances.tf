@@ -9,6 +9,7 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 4.0"
 
+
   for_each = toset(keys(local.instances))
 
   name = each.key
@@ -20,8 +21,7 @@ module "ec2_instance" {
   vpc_security_group_ids = [module.vote_service_sg.security_group_id]
 
   // Use modulo to distribute instances across different AZs
-  subnet_id              = module.vpc.public_subnets[count.index % length(module.vpc.public_subnets)]
-
+  subnet_id = module.vpc.public_subnets[count.index]
 
   associate_public_ip_address = true
   tags = {
@@ -30,6 +30,9 @@ module "ec2_instance" {
     Role        = local.instances[each.key]
   }
 }
+
+
+count = length(module.vpc.public_subnets)
 
 data "aws_instance" "created_instances" {
   for_each = module.ec2_instance
