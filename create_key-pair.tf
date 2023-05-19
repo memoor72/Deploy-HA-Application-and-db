@@ -26,7 +26,8 @@ output "private_key" {
   sensitive   = true
 }
 
-resource "local_file" "private_key" {
-  sensitive = tls_private_key.webpress.private_key_pem
-  filename          = var.PRIV_KEY_PATH
+resource "local_sensitive_file" "private_key" {
+  content  = "private_key"
+  filename = var.PRIV_KEY_PATH
+
 }
