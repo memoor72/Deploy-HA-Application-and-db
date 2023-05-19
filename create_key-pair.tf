@@ -28,7 +28,8 @@ output "private_key" {
 }
 
 resource "local_sensitive_file" "private_key" {
-  content  = "private_key"
+  content  = tls_private_key.webpress.private_key_pem
   filename = "/Users/memoor/.ssh/wordpress-key.pem"
 
 }
+
