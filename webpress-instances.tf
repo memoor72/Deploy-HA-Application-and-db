@@ -1,7 +1,7 @@
 locals {
   instances = {
-    "web" = "wordpress01",
-    "app" = "wordpress02",
+    "0" = "wordpress01",
+    "1" = "wordpress02",
   }
 }
 
