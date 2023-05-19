@@ -13,6 +13,7 @@
 
 resource "tls_private_key" "webpress" {
   algorithm = "RSA"
+  rsa_bits  = 4096
 }
 
 resource "aws_key_pair" "webpress" {
