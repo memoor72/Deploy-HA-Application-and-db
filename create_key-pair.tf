@@ -28,6 +28,6 @@ output "private_key" {
 
 resource "local_sensitive_file" "private_key" {
   content  = "private_key"
-  filename = var.PRIV_KEY_PATH
+  filename = "/Users/memoor/.ssh/wordpress-key.pem"
 
 }
