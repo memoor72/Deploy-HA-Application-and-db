@@ -15,7 +15,7 @@ module "ec2_instance" {
 
   ami                    = var.ami
   instance_type          = var.instance_type
-  key_name              = aws_key_pair.webpress.key_name
+  key_name              = aws_key_pair.wordpress.key_name
   monitoring             = true
   vpc_security_group_ids = [module.vote_service_sg.security_group_id]
 
@@ -39,7 +39,7 @@ data "aws_instance" "created_instances" {
 resource "aws_instance" "bastion" {
   ami                         = var.ami
   instance_type               = var.instance_type
-  key_name                    = aws_key_pair.webpress.key_name
+  key_name                    = aws_key_pair.wordpress.key_name
   monitoring                  = true
   vpc_security_group_ids      = [module.vote_service_sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
