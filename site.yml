@@ -1,6 +1,8 @@
-- hosts: wordpress
+- hosts: app
+  remote_user: ubuntu
   become: yes
   vars:
+    ansible_ssh_private_key_file: /Users/memoor/.ssh/webpress-key.pem
     db_host: aws_db_instance.devpro_rds.address
     db_name: var.db_name
     db_user: var.db_user
