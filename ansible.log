@@ -1,0 +1,12 @@
+2023-05-21 17:25:54,833 p=30762 u=memoor n=ansible | ERROR! the playbook: playbook.yaml could not be found
+2023-05-21 17:28:43,247 p=31013 u=memoor n=ansible | [WARNING]: Unable to parse /Users/memoor/AWS-Terraform Project/Deploy-HA-Application-and-db/dynamic_inventory_script.py as an inventory source
+
+2023-05-21 17:28:43,248 p=31013 u=memoor n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-05-21 17:28:43,259 p=31013 u=memoor n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-05-21 17:28:43,796 p=31013 u=memoor n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: wordpress
+
+2023-05-21 17:28:43,798 p=31013 u=memoor n=ansible | PLAY [wordpress] ******************************************************************************************************************************************************************************************
+2023-05-21 17:28:43,798 p=31013 u=memoor n=ansible | skipping: no hosts matched
+2023-05-21 17:28:43,798 p=31013 u=memoor n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************

@@ -27,7 +27,8 @@ output "bastion_host_ip" {
 }
 
 output "app_instance_ips" {
-  value = [for inst in module.ec2_instance : data.aws_instance.created_instances[inst.id].public_ip]
-  description = "Public IPs of the app instances."
+  description = "The public IP address of the app instances."
+  value = [for instance in module.ec2_instance : instance.public_ip]
 }
+
 
