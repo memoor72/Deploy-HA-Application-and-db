@@ -10,13 +10,10 @@ def dynamic_inventory():
 
     inventory = {
         'app': {
-            'hosts': data['app_instance_ips']['value'],
+            'hosts': data,  # data is already a list of IP addresses
             'vars': {}
         },
-        'bastion': {
-            'hosts': [data['bastion_host_ip']['value']],
-            'vars': {}
-        },
+       
         '_meta': {
             'hostvars': {}
         }
