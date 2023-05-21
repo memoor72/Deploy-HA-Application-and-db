@@ -21,3 +21,13 @@ output "key_pair_name" {
   value       = aws_key_pair.webpress.key_name
 }
 
+output "bastion_host_ip" {
+  value = aws_instance.bastion.public_ip
+  description = "Public IP of the bastion host."
+}
+
+output "app_instance_ips" {
+  value = [for inst in module.ec2_instance : data.aws_instance.created_instances[inst.id].public_ip]
+  description = "Public IPs of the app instances."
+}
+
